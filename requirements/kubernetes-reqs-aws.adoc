@@ -1,0 +1,332 @@
+---
+sidebar: sidebar 
+permalink: /requirements/kubernetes-reqs-aws.html 
+keywords: kubernetes, k8s, discover kubernetes cluster, discover k8s, amazon eks, eks, kubernetes support, aws 
+summary: 'Avant de pouvoir ajouter un cluster Amazon Elastic Kubernetes Service (Amazon EKS) à BlueXP, vous devez vous assurer que les exigences suivantes ont été respectées.' 
+---
+= Conditions requises pour les clusters Kubernetes dans AWS
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous pouvez ajouter des clusters Amazon Elastic Kubernetes Service (EKS) gérés ou des clusters Kubernetes autogérés sur AWS à BlueXP. Avant de pouvoir ajouter les clusters à BlueXP, vous devez vous assurer que les conditions suivantes sont remplies.
+
+
+NOTE: Cette section utilise _Kubernetes cluster_ où la configuration est la même pour les clusters EKS et Kubernetes autogérés. Le type de cluster est spécifié où la configuration diffère.
+
+
+
+== De formation
+
+Astra Trident:: Il est nécessaire de disposer de l'une des quatre versions les plus récentes d'Astra Trident. Vous pouvez installer ou mettre à niveau Astra Trident directement à partir de BlueXP. Vous devriez link:https://docs.netapp.com/us-en/trident/trident-get-started/requirements.html["passez en revue les prérequis"^] Avant d'installer Astra Trident.
+Cloud Volumes ONTAP:: Cloud Volumes ONTAP pour AWS doit être configuré en tant que système de stockage back-end pour le cluster. https://docs.netapp.com/us-en/trident/trident-use/backends.html["Accédez à la documentation Astra Trident pour connaître les étapes de configuration"^].
+Connecteur BlueXP:: Un connecteur doit être exécuté dans AWS avec les autorisations requises.  a Connector,Pour en savoir plus.
+Connectivité réseau:: La connectivité réseau est requise entre le cluster Kubernetes et le connecteur et entre le cluster Kubernetes et Cloud Volumes ONTAP.  networking requirements,Pour en savoir plus.
+Autorisation RBAC:: Le rôle BlueXP Connector doit être autorisé sur chaque cluster Kubernetes.  up RBAC authorization,Pour en savoir plus.
+
+
+
+
+== Préparer un connecteur
+
+BlueXP Connector est nécessaire dans AWS pour détecter et gérer les clusters Kubernetes. Vous devrez créer un nouveau connecteur ou utiliser un connecteur existant disposant des autorisations requises.
+
+
+
+=== Créer un nouveau connecteur
+
+Suivez les étapes de l'un des liens ci-dessous.
+
+* link:https://docs.netapp.com/us-en/cloud-manager-setup-admin/task-creating-connectors-aws.html["Créez un connecteur depuis BlueXP"^] (recommandé)
+* link:https://docs.netapp.com/us-en/cloud-manager-setup-admin/task-launching-aws-mktp.html["Créez un connecteur à partir d'AWS Marketplace"^]
+* link:https://docs.netapp.com/us-en/cloud-manager-setup-admin/task-installing-linux.html["Installez le connecteur sur un hôte Linux existant dans AWS"^]
+
+
+
+
+=== Ajoutez les autorisations requises à un connecteur existant
+
+À partir de la version 3.9.13, tout _nouvellement_ créé Connector inclut trois nouvelles autorisations AWS permettant la découverte et la gestion des clusters Kubernetes. Si vous avez créé un connecteur avant cette version, vous devrez modifier la stratégie existante pour le rôle IAM du connecteur afin de fournir les autorisations nécessaires.
+
+.Étapes
+. Accédez à la console AWS et ouvrez le service EC2.
+. Sélectionnez l'instance de connecteur, cliquez sur *sécurité*, puis cliquez sur le nom du rôle IAM pour afficher le rôle dans le service IAM.
++
+image:screenshot-aws-iam-role.png["Capture d'écran de la console AWS affichant le nom du rôle IAM dans l'onglet sécurité."]
+
+. Dans l'onglet *permissions*, développez la stratégie et cliquez sur *Modifier la stratégie*.
++
+image:screenshot-aws-edit-policy.png["Copie d'écran de la console AWS affichant le bouton Modifier la règle dans l'onglet autorisations."]
+
+. Cliquez sur *JSON* et ajoutez les autorisations suivantes dans la première série d'actions :
++
+** ec2:régions descriptives
+** eks:Listclusters
+** eks:DescribeCluster
+** iam:GetInstanceProfile
+
+
++
+https://docs.netapp.com/us-en/cloud-manager-setup-admin/reference-permissions-aws.html["Afficher le format JSON complet de la règle"^]
+
+. Cliquez sur *Review Policy*, puis sur *Save Changes*.
+
+
+
+
+== Examiner les besoins en matière de mise en réseau
+
+Il faut assurer une connectivité réseau entre le cluster Kubernetes et le connecteur, et entre le cluster Kubernetes et le système Cloud Volumes ONTAP qui fournit un stockage back-end au cluster.
+
+* Chaque cluster Kubernetes doit disposer d'une connexion entrante depuis le connecteur
+* Le connecteur doit disposer d'une connexion sortante vers chaque cluster Kubernetes sur le port 443
+
+
+Pour fournir cette connectivité, la méthode la plus simple est de déployer le connecteur et Cloud Volumes ONTAP dans le même VPC que le cluster Kubernetes. Sinon, vous devez configurer une connexion de peering VPC entre les différents VPC.
+
+Voici un exemple illustrant chaque composant dans le même VPC.
+
+image:diagram-kubernetes-eks.png["Schéma architectural d'un cluster EKS Kubernetes et de sa connexion à un connecteur et à Cloud Volumes ONTAP dans le même VPC."]
+
+Et voici un autre exemple de cluster EKS s'exécutant sur un autre VPC. Dans cet exemple, le VPC peering fournit une connexion entre le VPC pour le cluster EKS et le VPC pour le connecteur et le Cloud Volumes ONTAP.
+
+image:diagram_kubernetes.png["Schéma architectural d'un cluster EKS Kubernetes et de sa connexion à un connecteur et à Cloud Volumes ONTAP dans un VPC distinct."]
+
+
+
+== Configurez l'autorisation RBAC
+
+Vous devez autoriser le rôle de connecteur sur chaque cluster Kubernetes afin que le connecteur puisse détecter et gérer un cluster.
+
+Une autorisation différente est requise pour activer différentes fonctionnalités.
+
+Sauvegarde et restauration:: La sauvegarde et la restauration ne nécessitent que l'autorisation de base.
+Ajouter des classes de stockage:: Une autorisation étendue est nécessaire pour ajouter des classes de stockage à l'aide de BlueXP et surveiller le cluster pour les modifications apportées au back-end.
+Installer Astra trident:: Vous devez fournir une autorisation complète pour BlueXP afin d'installer Astra Trident.
++
+--
+
+NOTE: Pour installer Astra Trident, BlueXP installe le système back-end Trident et le secret Kubernetes qui contient les identifiants Astra Trident qui doit communiquer avec le cluster de stockage.
+
+--
+
+
+.Étapes
+. Créer un rôle de cluster et une liaison de rôle.
++
+.. Créez un fichier YAML qui inclut le texte suivant en fonction de vos exigences d'autorisation.
++
+[role="tabbed-block"]
+====
+.Sauvegarde/restauration
+--
+Ajoutez une autorisation de base pour activer la sauvegarde et la restauration des clusters Kubernetes.
+
+[source, yaml]
+----
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+    name: cloudmanager-access-clusterrole
+rules:
+    - apiGroups:
+          - ''
+      resources:
+          - namespaces
+      verbs:
+          - list
+          - watch
+    - apiGroups:
+          - ''
+      resources:
+          - persistentvolumes
+      verbs:
+          - list
+          - watch
+    - apiGroups:
+          - ''
+      resources:
+          - pods
+          - pods/exec
+      verbs:
+          - get
+          - list
+          - watch
+    - apiGroups:
+          - ''
+      resources:
+          - persistentvolumeclaims
+      verbs:
+          - list
+          - create
+          - watch
+    - apiGroups:
+          - storage.k8s.io
+      resources:
+          - storageclasses
+      verbs:
+          - list
+    - apiGroups:
+          - trident.netapp.io
+      resources:
+          - tridentbackends
+      verbs:
+          - list
+          - watch
+    - apiGroups:
+          - trident.netapp.io
+      resources:
+          - tridentorchestrators
+      verbs:
+          - get
+          - watch
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+    name: k8s-access-binding
+subjects:
+    - kind: Group
+      name: cloudmanager-access-group
+      apiGroup: rbac.authorization.k8s.io
+roleRef:
+    kind: ClusterRole
+    name: cloudmanager-access-clusterrole
+    apiGroup: rbac.authorization.k8s.io
+----
+--
+.Classes de stockage
+--
+Ajoutez une autorisation étendue pour ajouter des classes de stockage à l'aide de BlueXP.
+
+[source, yaml]
+----
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+    name: cloudmanager-access-clusterrole
+rules:
+    - apiGroups:
+          - ''
+      resources:
+          - secrets
+          - namespaces
+          - persistentvolumeclaims
+          - persistentvolumes
+          - pods
+          - pods/exec
+      verbs:
+          - get
+          - list
+          - watch
+          - create
+          - delete
+          - watch
+    - apiGroups:
+          - storage.k8s.io
+      resources:
+          - storageclasses
+      verbs:
+          - get
+          - create
+          - list
+          - watch
+          - delete
+          - patch
+    - apiGroups:
+          - trident.netapp.io
+      resources:
+          - tridentbackends
+          - tridentorchestrators
+          - tridentbackendconfigs
+      verbs:
+          - get
+          - list
+          - watch
+          - create
+          - delete
+          - watch
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+    name: k8s-access-binding
+subjects:
+    - kind: Group
+      name: cloudmanager-access-group
+      apiGroup: rbac.authorization.k8s.io
+roleRef:
+    kind: ClusterRole
+    name: cloudmanager-access-clusterrole
+    apiGroup: rbac.authorization.k8s.io
+----
+--
+.Installation de Trident
+--
+Utilisez la ligne de commande pour fournir une autorisation complète et permettre à BlueXP d'installer Astra Trident.
+
+[source, cli]
+----
+eksctl create iamidentitymapping --cluster < > --region < > --arn < > --group "system:masters" --username system:node:{{EC2PrivateDNSName}}
+----
+--
+====
+.. Appliquer la configuration à un cluster
++
+[source, kubectl]
+----
+kubectl apply -f <file-name>
+----
+
+
+. Créez un mappage d'identité avec le groupe d'autorisations.
++
+[role="tabbed-block"]
+====
+.Utiliser eksctl
+--
+Utilisez eksctl pour créer un mappage d'identité IAM entre un cluster et le rôle IAM pour le connecteur BlueXP.
+
+https://eksctl.io/usage/iam-identity-mappings/["Consultez la documentation eksctl pour obtenir des instructions complètes"^].
+
+Un exemple est fourni ci-dessous.
+
+[source, eksctl]
+----
+eksctl create iamidentitymapping --cluster <eksCluster> --region <us-east-2> --arn <ARN of the Connector IAM role> --group cloudmanager-access-group --username system:node:{{EC2PrivateDNSName}}
+----
+--
+.Modifiez aws-auth
+--
+Modifiez directement le AWS-auth ConfigMap pour ajouter un accès RBAC au rôle IAM pour le connecteur BlueXP.
+
+https://docs.aws.amazon.com/eks/latest/userguide/add-user-role.html["Pour obtenir des instructions complètes, consultez la documentation AWS EKS"^].
+
+Un exemple est fourni ci-dessous.
+
+[source, yaml]
+----
+apiVersion: v1
+data:
+  mapRoles: |
+    - groups:
+      - cloudmanager-access-group
+      rolearn: <ARN of the Connector IAM role>
+     username: system:node:{{EC2PrivateDNSName}}
+kind: ConfigMap
+metadata:
+  creationTimestamp: "2021-09-30T21:09:18Z"
+  name: aws-auth
+  namespace: kube-system
+  resourceVersion: "1021"
+  selfLink: /api/v1/namespaces/kube-system/configmaps/aws-auth
+  uid: dcc31de5-3838-11e8-af26-02e00430057c
+----
+--
+====
+

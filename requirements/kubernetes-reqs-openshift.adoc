@@ -1,0 +1,371 @@
+---
+sidebar: sidebar 
+permalink: /requirements/kubernetes-reqs-openshift.html 
+keywords: kubernetes, k8s, discover kubernetes cluster, discover k8s, openshift, oc, kubernetes support 
+summary: Vous pouvez ajouter et gérer des clusters OpenShift Kubernetes autogérés avec BlueXP. Avant de pouvoir ajouter les clusters à BlueXP, assurez-vous que les conditions suivantes sont remplies. 
+---
+= Conditions requises pour les clusters Kubernetes dans OpenShift
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous pouvez ajouter et gérer des clusters OpenShift Kubernetes autogérés avec BlueXP. Avant de pouvoir ajouter les clusters à BlueXP, assurez-vous que les conditions suivantes sont remplies.
+
+
+
+== De formation
+
+Astra Trident:: Il est nécessaire de disposer de l'une des quatre versions les plus récentes d'Astra Trident. Vous pouvez installer ou mettre à niveau Astra Trident directement à partir de BlueXP. Vous devriez link:https://docs.netapp.com/us-en/trident/trident-get-started/requirements.html["passez en revue les prérequis"^] Avant d'installer Astra Trident.
+Cloud Volumes ONTAP:: Cloud Volumes ONTAP doit être configuré en tant que système de stockage back-end pour le cluster. https://docs.netapp.com/us-en/trident/trident-use/backends.html["Accédez à la documentation Astra Trident pour connaître les étapes de configuration"^].
+Connecteur BlueXP:: BlueXP Connector est nécessaire pour l'importation et la gestion des clusters Kubernetes. Vous devrez créer un nouveau connecteur ou utiliser un connecteur existant possédant les autorisations requises pour votre fournisseur de cloud :
++
+--
+* link:https://docs.netapp.com/us-en/cloud-manager-kubernetes/requirements/kubernetes-reqs-aws.html#prepare-a-connector["Connecteur AWS"]
+* link:https://docs.netapp.com/us-en/cloud-manager-kubernetes/requirements/kubernetes-reqs-aks.html#prepare-a-connector["Connecteur Azure"]
+* link:https://docs.netapp.com/us-en/cloud-manager-kubernetes/requirements/kubernetes-reqs-gke.html#prepare-a-connector["Google Cloud Connector"]
+
+
+--
+Connectivité réseau:: La connectivité réseau est requise entre le cluster Kubernetes et le connecteur et entre le cluster Kubernetes et Cloud Volumes ONTAP.
+Fichier de configuration Kubernetes (kubeconfig) avec autorisation RBAC:: Pour importer des clusters OpenShift, il vous faut un fichier kubeconfig avec l'autorisation RBAC requise pour activer différentes fonctionnalités.  a kubeconfig file.
++
+--
+* Sauvegarde et restauration : la sauvegarde et la restauration ne nécessitent qu'une autorisation de base.
+* Ajout de classes de stockage : une autorisation étendue est nécessaire pour ajouter des classes de stockage à l'aide de BlueXP et surveiller le cluster pour les modifications apportées au back-end.
+* Installer Astra Trident : vous devez fournir une autorisation complète pour BlueXP afin d'installer Astra Trident.
++
+
+NOTE: Pour installer Astra Trident, BlueXP installe le système back-end Trident et le secret Kubernetes qui contient les identifiants Astra Trident qui doit communiquer avec le cluster de stockage.
+
+
+
+--
+
+
+
+
+== Créez un fichier kubeconfig
+
+Créez un fichier kubeconfig à importer dans BlueXP à l'aide de l'interface de ligne de commande OpenShift.
+
+.Étapes
+. Connectez-vous à l'interface de ligne de commande OpenShift via `oc login` Sur une URL publique avec un utilisateur administratif.
+. Créer un compte de service comme suit :
++
+.. Créez un fichier de compte de service appelé `oc-service-account.yaml`.
++
+Ajustez le nom et l'espace de noms selon vos besoins. Si des modifications sont apportées ici, vous devez appliquer les mêmes modifications dans les étapes suivantes.
+
++
+[source, cli]
+----
+oc-service-account.yaml
+----
++
+[source, cli]
+----
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: oc-service-account
+  namespace: default
+----
+.. Appliquer le compte de service :
++
+[source, cli]
+----
+kubectl apply -f oc-service-account.yaml
+----
+
+
+. Créez un lien de rôle personnalisé en fonction de vos exigences d'autorisation.
++
+.. Créer un `ClusterRoleBinding` fichier appelé `oc-clusterrolebinding.yaml`.
++
+[source, cli]
+----
+oc-clusterrolebinding.yaml
+----
+.. Configurez l'autorisation RBAC selon les besoins pour le cluster.
++
+[role="tabbed-block"]
+====
+.Sauvegarde/restauration
+--
+Ajoutez une autorisation de base pour activer la sauvegarde et la restauration des clusters Kubernetes.
+
+[source, yaml]
+----
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+    name: cloudmanager-access-clusterrole
+rules:
+    - apiGroups:
+          - ''
+      resources:
+          - namespaces
+      verbs:
+          - list
+          - watch
+    - apiGroups:
+          - ''
+      resources:
+          - persistentvolumes
+      verbs:
+          - list
+          - watch
+    - apiGroups:
+          - ''
+      resources:
+          - pods
+          - pods/exec
+      verbs:
+          - get
+          - list
+          - watch
+    - apiGroups:
+          - ''
+      resources:
+          - persistentvolumeclaims
+      verbs:
+          - list
+          - create
+          - watch
+    - apiGroups:
+          - storage.k8s.io
+      resources:
+          - storageclasses
+      verbs:
+          - list
+    - apiGroups:
+          - trident.netapp.io
+      resources:
+          - tridentbackends
+      verbs:
+          - list
+          - watch
+    - apiGroups:
+          - trident.netapp.io
+      resources:
+          - tridentorchestrators
+      verbs:
+          - get
+          - watch
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+    name: k8s-access-binding
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: cloudmanager-access-clusterrole
+subjects:
+    - kind: ServiceAccount
+      name: oc-service-account
+      namespace: default
+----
+--
+.Classes de stockage
+--
+Ajoutez une autorisation étendue pour ajouter des classes de stockage à l'aide de BlueXP.
+
+[source, yaml]
+----
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+    name: cloudmanager-access-clusterrole
+rules:
+    - apiGroups:
+          - ''
+      resources:
+          - secrets
+          - namespaces
+          - persistentvolumeclaims
+          - persistentvolumes
+          - pods
+          - pods/exec
+      verbs:
+          - get
+          - list
+          - watch
+          - create
+          - delete
+          - watch
+    - apiGroups:
+          - storage.k8s.io
+      resources:
+          - storageclasses
+      verbs:
+          - get
+          - create
+          - list
+          - watch
+          - delete
+          - patch
+    - apiGroups:
+          - trident.netapp.io
+      resources:
+          - tridentbackends
+          - tridentorchestrators
+          - tridentbackendconfigs
+      verbs:
+          - get
+          - list
+          - watch
+          - create
+          - delete
+          - watch
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+    name: k8s-access-binding
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: cloudmanager-access-clusterrole
+subjects:
+    - kind: ServiceAccount
+      name: oc-service-account
+      namespace: default
+----
+--
+.Installation de Trident
+--
+Accordez l'autorisation d'administration complète et permettez à BlueXP d'installer Astra Trident.
+
+[source, cli]
+----
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: cloudmanager-access-clusterrole
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: cluster-admin
+subjects:
+- kind: ServiceAccount
+  name: oc-service-account
+  namespace: default
+----
+--
+====
+.. Appliquer la liaison de rôle de cluster :
++
+[source, cli]
+----
+kubectl apply -f oc-clusterrolebinding.yaml
+----
+
+
+. Indiquez les secrets du compte de service, en les remplaçant `<context>` avec le contexte approprié pour votre installation :
++
+[source, cli]
+----
+kubectl get serviceaccount oc-service-account --context <context> --namespace default -o json
+----
++
+La fin de la sortie doit ressembler à ce qui suit :
+
++
+[source, cli]
+----
+"secrets": [
+{ "name": "oc-service-account-dockercfg-vhz87"},
+{ "name": "oc-service-account-token-r59kr"}
+]
+----
++
+Les indices pour chaque élément dans `secrets` la matrice commence par 0. Dans l'exemple ci-dessus, l'index de `oc-service-account-dockercfg-vhz87` serait 0 et l'index pour `oc-service-account-token-r59kr` serait 1. Dans votre résultat, notez l'index du nom du compte de service qui contient le mot "jeton".
+
+. Générez le kubeconfig comme suit :
++
+.. Créer un `create-kubeconfig.sh` fichier. Remplacement `TOKEN_INDEX` au début du script suivant avec la valeur correcte.
++
+[source, cli]
+----
+create-kubeconfig.sh
+----
++
+[source, sh]
+----
+# Update these to match your environment.
+# Replace TOKEN_INDEX with the correct value
+# from the output in the previous step. If you
+# didn't change anything else above, don't change
+# anything else here.
+
+SERVICE_ACCOUNT_NAME=oc-service-account
+NAMESPACE=default
+NEW_CONTEXT=oc
+KUBECONFIG_FILE='kubeconfig-sa'
+
+CONTEXT=$(kubectl config current-context)
+
+SECRET_NAME=$(kubectl get serviceaccount ${SERVICE_ACCOUNT_NAME} \
+  --context ${CONTEXT} \
+  --namespace ${NAMESPACE} \
+  -o jsonpath='{.secrets[TOKEN_INDEX].name}')
+TOKEN_DATA=$(kubectl get secret ${SECRET_NAME} \
+  --context ${CONTEXT} \
+  --namespace ${NAMESPACE} \
+  -o jsonpath='{.data.token}')
+
+TOKEN=$(echo ${TOKEN_DATA} | base64 -d)
+
+# Create dedicated kubeconfig
+# Create a full copy
+kubectl config view --raw > ${KUBECONFIG_FILE}.full.tmp
+
+# Switch working context to correct context
+kubectl --kubeconfig ${KUBECONFIG_FILE}.full.tmp config use-context ${CONTEXT}
+
+# Minify
+kubectl --kubeconfig ${KUBECONFIG_FILE}.full.tmp \
+  config view --flatten --minify > ${KUBECONFIG_FILE}.tmp
+
+# Rename context
+kubectl config --kubeconfig ${KUBECONFIG_FILE}.tmp \
+  rename-context ${CONTEXT} ${NEW_CONTEXT}
+
+# Create token user
+kubectl config --kubeconfig ${KUBECONFIG_FILE}.tmp \
+  set-credentials ${CONTEXT}-${NAMESPACE}-token-user \
+  --token ${TOKEN}
+
+# Set context to use token user
+kubectl config --kubeconfig ${KUBECONFIG_FILE}.tmp \
+  set-context ${NEW_CONTEXT} --user ${CONTEXT}-${NAMESPACE}-token-user
+
+# Set context to correct namespace
+kubectl config --kubeconfig ${KUBECONFIG_FILE}.tmp \
+  set-context ${NEW_CONTEXT} --namespace ${NAMESPACE}
+
+# Flatten/minify kubeconfig
+kubectl config --kubeconfig ${KUBECONFIG_FILE}.tmp \
+  view --flatten --minify > ${KUBECONFIG_FILE}
+
+# Remove tmp
+rm ${KUBECONFIG_FILE}.full.tmp
+rm ${KUBECONFIG_FILE}.tmp
+----
+.. Source des commandes à appliquer à votre cluster Kubernetes.
++
+[source, cli]
+----
+source create-kubeconfig.sh
+----
+
+
+
+
+Vous utiliserez le résultat `kubeconfig-sa` Fichier pour ajouter un cluster OpenShift à BlueXP.

@@ -1,0 +1,45 @@
+---
+sidebar: sidebar 
+permalink: /task/task-kubernetes-discover-openshift.html 
+keywords: kubernetes, k8s, discover kubernetes cluster, discover k8s, openshift, kubernetes support, import kubernetes cluster, import 
+summary: Importez un cluster OpenShift autogéré vers BlueXP, afin que vous puissiez commencer à sauvegarder les volumes persistants sur votre fournisseur de cloud. 
+---
+= Ajoutez un cluster OpenShift à BlueXP
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Importez un cluster OpenShift autogéré vers BlueXP, afin que vous puissiez commencer à sauvegarder les volumes persistants sur votre fournisseur de cloud.
+
+
+
+== Importer un cluster
+
+Vous pouvez importer un cluster Kubernetes autogéré à l'aide d'un fichier de configuration Kubernetes.
+
+Avant d'ajouter un cluster OpenShift, il est nécessaire de disposer des éléments suivants :
+
+* Le fichier `kubeconfig-sa'que vous avez créé dans link:https://docs.netapp.com/us-en/cloud-manager-kubernetes/requirements/kubernetes-reqs-openshift.html#create-a-kubeconfig-file["créez un fichier kubeconfig"].
+* Les fichiers public Certificate Authority (par exemple, CA.crt), client Key (par exemple, tls.key) et client Certification (par exemple, tls.crt) pour le cluster.
+
+
+.Étapes
+. Dans *Canvas*, sélectionnez *Ajouter un environnement de travail*.
+. Sélectionnez votre fournisseur de cloud et sélectionnez *Kubernetes Cluster* puis *Next*.
+. Sélectionnez *Import Cluster* puis *Suivant*.
+. Téléchargez le `kubeconfig-sa` fichier créé dans link:https://docs.netapp.com/us-en/cloud-manager-kubernetes/requirements/kubernetes-reqs-openshift.html#create-a-kubeconfig-file["créez un fichier kubeconfig"]. Sélectionnez le cluster Kubernetes et sélectionnez *Suivant*.
++
+image:screenshot-k8s-aks-import-1.png["Capture d'écran de la page Import cluster Kubernetes avec le fichier de configuration et le tableau Available clusters."]
+
+. Télécharger les certificats de cluster.
++
+image:screenshot-oc-certs.png["Copie d'écran de l'écran de téléchargement du certificat du cluster."]
+
+
+
+BlueXP ajoute le cluster Kubernetes à Canvas.

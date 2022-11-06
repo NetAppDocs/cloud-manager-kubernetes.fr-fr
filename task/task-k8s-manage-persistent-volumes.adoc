@@ -1,0 +1,29 @@
+---
+sidebar: sidebar 
+permalink: /task/task-k8s-manage-persistent-volumes.html 
+keywords: kubernetes, k8s, view persistent volume 
+summary: Une fois que vous avez ajouté un cluster Managed-Kubernetes dans Canvas, vous pouvez utiliser BlueXP pour afficher les volumes persistants connectés. 
+---
+= Afficher les volumes persistants
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Une fois que vous avez ajouté un cluster Kubernetes géré dans Canvas, vous pouvez utiliser BlueXP pour afficher les volumes persistants.
+
+
+NOTE: BlueXP surveille le cluster Kubernetes pour détecter les modifications apportées au back-end et met à jour la table des volumes persistants lorsque de nouveaux volumes sont ajoutés. Si la sauvegarde automatique était configurée sur le cluster, la sauvegarde est automatiquement activée sur les nouveaux volumes persistants.
+
+.Étapes
+. Double-cliquez sur l'environnement de travail Kubernetes dans la zone de travail ou cliquez sur *entrer un environnement de travail*.
+. Cliquez sur *Afficher les volumes* dans l'onglet *Présentation* ou cliquez sur l'onglet *volumes persistants*. Si aucun volume persistant n'est configuré, voir link:https://docs.netapp.com/us-en/trident/trident-concepts/provisioning.html["Provisionnement"^] Pour en savoir plus sur le provisionnement des volumes dans Astra Trident.
+
+
+Un tableau des volumes persistants configurés s'affiche.
+
+image:screenshot-k8s-volume-table.png["Capture d'écran de la table des volumes persistants."]

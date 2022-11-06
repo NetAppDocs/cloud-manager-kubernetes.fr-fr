@@ -1,0 +1,31 @@
+---
+sidebar: sidebar 
+permalink: /task/task-k8s-manage-remove-cluster.html 
+keywords: kubernetes, k8s, remove cluster 
+summary: 'Une fois que vous avez ajouté un cluster Managed-Kubernetes dans Canvas, vous pouvez utiliser BlueXP pour supprimer des clusters de l"espace de travail.' 
+---
+= Supprimez les clusters Kubernetes de l'espace de travail
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Une fois que vous avez ajouté un cluster Kubernetes géré dans Canvas, vous pouvez utiliser BlueXP pour supprimer des clusters de l'espace de travail.
+
+.Étapes
+. Double-cliquez sur l'environnement de travail Kubernetes dans la zone de travail ou cliquez sur *entrer un environnement de travail*.
+. Dans le coin supérieur droit de la page, sélectionnez le menu actions et cliquez sur *Supprimer de l'espace de travail*.
++
+image:screenshot-k8s-remove-cluster.png["Capture d'écran affichant le menu permettant de supprimer le cluster Kubernetes de l'espace de travail."]
+
+. Cliquez sur *Supprimer* pour confirmer la suppression du cluster de l'espace de travail. Vous pouvez redécouvrir ce cluster à tout moment.
++
+image:screenshot-k8s-confirm-remove-cluster.png["Copie d'écran de la page confirmant la suppression du cluster Kubernetes de l'espace de travail."]
+
+
+
+Le cluster Kubernetes est supprimé de l'espace de travail et n'est plus visible sur la Canvas.

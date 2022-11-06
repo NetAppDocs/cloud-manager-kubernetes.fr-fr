@@ -1,0 +1,23 @@
+---
+sidebar: sidebar 
+permalink: /task/task-kubernetes-enable-services.html 
+keywords: kubernetes, k8s, discover kubernetes cluster, discover k8s, amazon eks, eks, kubernetes support 
+summary: 'Lorsque vous ajoutez un cluster Kubernetes géré à Canvas, vous pouvez utiliser les services de données cloud NetApp pour bénéficier d"une gestion avancée des données.' 
+---
+= Utilisez les services de données cloud NetApp avec des clusters Kubernetes
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Lorsque vous ajoutez un cluster Kubernetes géré à Canvas, vous pouvez utiliser les services de données cloud de NetApp pour bénéficier d'une gestion avancée des données.
+
+Vous pouvez utiliser Cloud Backup pour sauvegarder les volumes persistants dans le stockage objet.
+
+link:https://docs.netapp.com/us-en/cloud-manager-backup-restore/concept-kubernetes-backup-to-cloud.html["Découvrez comment protéger les données de clusters Kubernetes à l'aide de Cloud Backup"^].
+
+image:screenshot-k8s-backup.png["Copie d'écran de la page Kubernetes du Cloud Backup Service présentant cinq tâches de sauvegarde pour un cluster Kubernetes."]

@@ -1,0 +1,37 @@
+---
+sidebar: sidebar 
+permalink: concept-manage-k8s.html 
+keywords: overview, manage, k8s, kubernetes 
+summary: Vous pouvez utiliser BlueXP pour installer Astra Trident, configurer des classes de stockage, supprimer des clusters et activer les services de données. 
+---
+= Gérez les clusters Kubernetes
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+Vous pouvez utiliser BlueXP pour installer ou mettre à niveau Astra Trident, configurer des classes de stockage, supprimer des clusters et activer les services de données.
+
+
+NOTE: Astra Trident déployé avec `tridentctl` n'est pas pris en charge. Si vous avez déployé Astra Trident avec `tridentctl`, Vous ne pouvez pas utiliser BlueXP pour gérer vos clusters Kubernetes. Vous devez  et réinstaller link:https://docs.netapp.com/us-en/trident/trident-get-started/kubernetes-deploy-operator.html["Utilisation de l'opérateur Trident"^] ou link:./tasks/task-k8s-manage-trident.html["Utilisation de BlueXP"].
+
+
+
+== Caractéristiques
+
+Après avoir ajouté des clusters Kubernetes à BlueXP, vous pouvez gérer les clusters à partir de la page de ressources. Pour ouvrir la page de ressource, double-cliquez sur l'environnement de travail Kubernetes sur la fenêtre Canvas.
+
+image:screenshot-k8s-resource-page.png["Copie d'écran de la page de ressources Kubernetes présentant les détails du cluster."]
+
+À partir de la page de ressources, vous pouvez :
+
+* Afficher l'état du cluster Kubernetes
+* Vérifiez qu'une version compatible d'Astra Trident est installée ou effectuez une mise à niveau vers la dernière version d'Astra Trident. Voir link:./task/task-k8s-manage-trident.html["Installer Astra Trident"].
+* Ajouter et supprimer des classes de stockage. Voir link:./task/task-k8s-manage-storage-classes.html["Gérer les classes de stockage"].
+* Afficher les volumes persistants Voir link:./task/task-k8s-manage-persistent-volumes.html["Afficher les volumes persistants"].
+* Supprimez les clusters Kubernetes de l'espace de travail. Voir link:./task/task-k8s-manage-remove-cluster.html["Supprimer les clusters"].
+* Activer ou afficher Cloud Backup. Voir link:./task/task-kubernetes-enable-services.html["Avec les services de données cloud NetApp"].
+

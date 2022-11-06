@@ -1,0 +1,59 @@
+---
+sidebar: sidebar 
+permalink: /task/task-k8s-quick-start.html 
+keywords: kubernetes, persistent volumes, containers, persistent storage, kubeconfig, trident, kubernetes cluster, storage classes, classes, cvo-single, cvo-ha, thick provisioning, trident_trident, connect, disconnect, provision 
+summary: Ajoutez des clusters Kubernetes à BlueXP pour une gestion avancée des données en quelques étapes seulement. 
+---
+= Commencez avec les clusters Kubernetes
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Ajoutez des clusters Kubernetes à BlueXP pour une gestion avancée des données en quelques étapes seulement.
+
+
+
+== Démarrage rapide
+
+Suivez ces étapes pour démarrer rapidement.
+
+[role="quick-margin-para"]
+Assurez-vous que votre environnement respecte les conditions préalables requises pour votre type de cluster.
+
+[role="quick-margin-para"]
+link:https://docs.netapp.com/us-en/cloud-manager-kubernetes/requirements/kubernetes-reqs-aws.html["Conditions requises pour les clusters Kubernetes dans AWS"]
+
+[role="quick-margin-para"]
+link:https://docs.netapp.com/us-en/cloud-manager-kubernetes/requirements/kubernetes-reqs-aks.html["Conditions requises pour les clusters Kubernetes dans Azure"]
+
+[role="quick-margin-para"]
+link:https://docs.netapp.com/us-en/cloud-manager-kubernetes/requirements/kubernetes-reqs-gke.html["Conditions requises pour les clusters Kubernetes dans Google Cloud"]
+
+[role="quick-margin-para"]
+Vous pouvez ajouter des clusters Kubernetes et les connecter à un environnement de travail à l'aide de BlueXP.
+
+[role="quick-margin-para"]
+link:https://docs.netapp.com/us-en/cloud-manager-kubernetes/task/task-kubernetes-discover-aws.html["Ajoutez un cluster Amazon Kubernetes"]
+
+[role="quick-margin-para"]
+link:https://docs.netapp.com/us-en/cloud-manager-kubernetes/task/task-kubernetes-discover-azure.html["Ajoutez un cluster Azure Kubernetes"]
+
+[role="quick-margin-para"]
+link:https://docs.netapp.com/us-en/cloud-manager-kubernetes/task/task-kubernetes-discover-gke.html["Ajoutez un cluster Google Cloud Kubernetes"]
+
+[role="quick-margin-para"]
+Demandez et gérez les volumes persistants à l'aide d'interfaces et de constructions Kubernetes natives. BlueXP crée des classes de stockage NFS et iSCSI que vous pouvez utiliser pour le provisionnement de volumes persistants.
+
+[role="quick-margin-para"]
+link:https://docs.netapp.com/us-en/trident/trident-get-started/kubernetes-postdeployment.html#step-3-provision-your-first-volume["En savoir plus sur le provisionnement de votre premier volume avec Astra Trident"^].
+
+[role="quick-margin-para"]
+Après avoir ajouté des clusters Kubernetes à BlueXP, vous pouvez gérer les clusters à partir de la page de ressources BlueXP.
+
+[role="quick-margin-para"]
+link:task-k8s-manage-trident.html["Apprenez à gérer les clusters Kubernetes."]

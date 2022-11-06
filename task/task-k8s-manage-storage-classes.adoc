@@ -1,0 +1,104 @@
+---
+sidebar: sidebar 
+permalink: /task/task-k8s-manage-storage-classes.html 
+keywords: kubernetes, k8s, add storage class, remove storage class 
+summary: Une fois que vous avez ajouté un cluster Managed-Kubernetes dans Canvas, vous pouvez utiliser BlueXP pour gérer les classes de stockage. 
+---
+= Gérer les classes de stockage
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Une fois que vous avez ajouté un cluster Kubernetes géré à Canvas, vous pouvez utiliser BlueXP pour gérer les classes de stockage.
+
+
+NOTE: Si aucune classe de stockage n'est définie, le cluster indique qu'une action est requise. Double-cliquez sur le cluster dans Canvas pour ouvrir la page d'action permettant d'ajouter une classe de stockage.
+
+
+
+== Ajouter une classe de stockage
+
+.Étapes
+. Dans la fenêtre Canvas, glissez-déposez l'environnement de travail Kubernetes sur l'environnement de travail Cloud Volumes ONTAP ou Amazon FSX pour ONTAP pour ouvrir l'assistant de classe de stockage.
+. Indiquez un nom pour la classe de stockage.
+. Sélectionnez *Filesystem* ou *Block* Storage.
++
+.. Pour le stockage *Block*, sélectionnez un type de système de fichiers (fstype)
++
+image:screenshot-k8s-storage-fstype.png["Capture d'écran montrant l'option de type fstype pour le stockage en mode bloc lors de la configuration d'une classe de stockage K8s."]
+
+.. Pour le stockage *Block* ou *Filesystem*, vous pouvez sélectionner pour activer l'économie de classe de stockage.
++
+image:screenshot-k8s-storage-economy.png["Capture d'écran montrant l'option d'économie de stockage lors de la configuration d'une classe de stockage de type bloc ou fichier K8s."]
+
++
+
+NOTE: La sauvegarde et la restauration ne sont pas prises en charge dans le cas d'économies de la classe de stockage.
+
+
+
+. Sélectionnez les options d'extension de volume, de liaison de volume et de classe de stockage par défaut. Cliquez sur *Suivant*.
+. Sélectionnez un environnement de travail à connecter au cluster. Cliquez sur *Ajouter*.
++
+image:screenshot-k8s-select-storage-class.png["Copie d'écran montrant la sélection de l'environnement de travail pour le cluster Kubernetes."]
+
+
+
+Vous pouvez cliquer sur pour afficher la classe de stockage depuis la page de ressources du cluster Kubernetes.
+
+image:screenshot-k8s-view-storage-class.png["Copie d'écran affichant « Afficher la classe de stockage » sur la page de ressources Kubernetes."]
+
+
+
+== Afficher les détails de l'environnement de travail
+
+.Étapes
+. Double-cliquez sur l'environnement de travail Kubernetes dans la zone de travail ou cliquez sur *entrer un environnement de travail*.
+. Cliquez sur l'onglet *classes de stockage*.
+. Cliquez sur l'icône d'information pour afficher les détails de l'environnement de travail.
+
+
+Le panneau de détails de l'environnement de travail s'ouvre.
+
+image:screenshot-k8s-info-storage-class.png["Copie d'écran des détails de l'environnement de travail pour le cluster Kubernetes."]
+
+
+
+== Définir la classe de stockage par défaut
+
+.Étapes
+. Double-cliquez sur l'environnement de travail Kubernetes dans la zone de travail ou cliquez sur *entrer un environnement de travail*.
+. Cliquez sur l'onglet *classes de stockage*.
+. Cliquez sur le menu d'action de la classe de stockage et cliquez sur *définir comme valeur par défaut*.
++
+image:screenshot-k8s-default-storage-class.png["Capture d'écran du menu d'action définissant la classe de stockage par défaut."]
+
+
+
+La classe de stockage sélectionnée est définie par défaut.
+
+image:screenshot-k8s-default-set-storage-class.png["Capture d'écran indiquant la classe de stockage par défaut."]
+
+
+
+== Supprimer la classe de stockage
+
+.Étapes
+. Double-cliquez sur l'environnement de travail Kubernetes dans la zone de travail ou cliquez sur *entrer un environnement de travail*.
+. Cliquez sur l'onglet *classes de stockage*.
+. Cliquez sur le menu d'action de la classe de stockage et cliquez sur *définir comme valeur par défaut*.
++
+image:screenshot-k8s-remove-storage-class.png["Capture d'écran du menu d'action pour supprimer la classe de stockage."]
+
+. Cliquez sur *Supprimer* pour confirmer la suppression de la classe de stockage.
++
+image:screenshot-k8s-remove-confirm-storage-class.png["Capture d'écran de l'écran de confirmation pour supprimer la classe de stockage."]
+
+
+
+La classe de stockage sélectionnée est supprimée.

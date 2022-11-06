@@ -1,0 +1,68 @@
+---
+sidebar: sidebar 
+permalink: /task/task-kubernetes-discover-azure.html 
+keywords: kubernetes, k8s, discover kubernetes cluster, discover k8s, import kubernetes cluster, azure, aks, kubernetes support 
+summary: Ajoutez un cluster Kubernetes à BlueXP, pour que vous puissiez commencer à sauvegarder des volumes persistants sur Azure. 
+---
+= Ajout d'un cluster Azure Kubernetes à BlueXP
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous pouvez détecter ou importer des clusters Kubernetes vers BlueXP, pour que vous puissiez sauvegarder des volumes persistants sur Azure.
+
+
+
+== Découvrir un cluster
+
+Vous pouvez détecter un cluster Kubernetes entièrement géré ou autogéré. Les clusters gérés doivent être découverts ; ils ne peuvent pas être importés.
+
+.Étapes
+. Dans *Canvas*, cliquez sur *Ajouter un environnement de travail*.
+. Sélectionnez *Microsoft Azure* > *Cluster Kubernetes* et cliquez sur *Suivant*.
++
+image:screenshot-discover-kubernetes-aks.png["Copie d'écran de la page Add Working Environment montrant que Microsoft Azure et le cluster Kubernetes sont sélectionnés."]
+
+. Sélectionnez *Discover Cluster* et cliquez sur *Next*.
+. Sélectionnez un cluster Kubernetes et cliquez sur *Suivant*.
++
+image:screenshot-k8s-aks-discover.png["Copie d'écran de la page découvrir un cluster Kubernetes présentant un cluster Kubernetes sélectionné."]
+
+
+
+BlueXP ajoute le cluster Kubernetes à Canvas.
+
+image:screenshot-k8s-aks-canvas.png["Capture d'écran du Canvas dans BlueXP qui montre un cluster Kubernetes."]
+
+
+
+== Importer un cluster
+
+Vous pouvez importer un cluster Kubernetes autogéré à l'aide d'un fichier de configuration Kubernetes.
+
+
+
+== Avant de commencer
+
+Vous aurez besoin de certificats d'autorité de certification, de clé client et de certificat client pour l'utilisateur spécifié dans le fichier YAML du rôle de cluster pour importer les clusters Kubernetes. L'administrateur du cluster Kubernetes reçoit ces certifications lors de la création d'utilisateurs sur le cluster Kubernetes.
+
+.Étapes
+. Dans *Canvas*, cliquez sur *Ajouter un environnement de travail*.
+. Sélectionnez *Microsoft Azure* > *Cluster Kubernetes* et cliquez sur *Suivant*.
+. Sélectionnez *Import Cluster* et cliquez sur *Suivant*.
+. Téléchargez un fichier de configuration Kubernetes au format YAML.
++
+image:screenshot-k8s-aks-import-1.png["Capture d'écran de la page Import cluster Kubernetes avec le fichier de configuration et le tableau Available clusters."]
+
+. Téléchargez les certificats de cluster fournis par l'administrateur de cluster Kubernetes.
++
+image:screenshot-k8s-aks-import-2.png["Capture d'écran de la page de certificats de cluster utilisée pour télécharger les certificats d'autorité de certification, de clé client et de certificat client."]
+
+
+
+BlueXP ajoute le cluster Kubernetes à Canvas.

@@ -1,0 +1,59 @@
+---
+sidebar: sidebar 
+permalink: /task/task-kubernetes-discover-aws.html 
+keywords: kubernetes, k8s, discover kubernetes cluster, discover k8s, amazon eks, eks, kubernetes support, import kubernetes cluster, import, amazon s3, amazon, aws 
+summary: 'Ajoutez des clusters Amazon Elastic Kubernetes Service (Amazon EKS) à BlueXP, pour que vous puissiez commencer à sauvegarder les volumes persistants sur Amazon S3.' 
+---
+= Ajouter un cluster Amazon Kubernetes à BlueXP
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous pouvez détecter ou importer des clusters Kubernetes vers BlueXP, et ainsi sauvegarder des volumes persistants sur Amazon S3.
+
+
+
+== Découvrir un cluster
+
+Vous pouvez détecter un cluster Kubernetes entièrement géré ou autogéré. Les clusters gérés doivent être découverts ; ils ne peuvent pas être importés.
+
+.Étapes
+. Dans *Canvas*, cliquez sur *Ajouter un environnement de travail*.
+. Sélectionnez *Amazon Web Services* > *Cluster Kubernetes* et cliquez sur *Suivant*.
++
+image:screenshot-discover-kubernetes-aws-1.png["Copie d'écran de la page découvrir un cluster Kubernetes montrant une région AWS sélectionnée et un cluster Kubernetes."]
+
+. Sélectionnez *Discover Cluster* et cliquez sur *Next*.
+. Choisissez une région AWS, sélectionnez un cluster Kubernetes, puis cliquez sur *Suivant*.
++
+image:screenshot-discover-kubernetes-aws-2.png["Copie d'écran de la page découvrir un cluster Kubernetes montrant une région AWS sélectionnée et un cluster Kubernetes."]
+
+
+
+BlueXP ajoute le cluster Kubernetes à Canvas.
+
+image:screenshot-kubernetes-canvas.png["Capture d'écran du Canvas dans BlueXP qui montre un cluster Kubernetes."]
+
+
+
+== Importer un cluster
+
+Vous pouvez importer un cluster Kubernetes autogéré à l'aide d'un fichier de configuration Kubernetes.
+
+.Étapes
+. Dans *Canvas*, cliquez sur *Ajouter un environnement de travail*.
+. Sélectionnez *Amazon Web Services* > *Cluster Kubernetes* et cliquez sur *Suivant*.
+. Sélectionnez *Import Cluster* et cliquez sur *Suivant*.
+. Téléchargez un fichier de configuration Kubernetes au format YAML.
++
+image:screenshot-k8s-aks-import-1.png["Capture d'écran de la page Import cluster Kubernetes avec le fichier de configuration et le tableau Available clusters."]
+
+. Sélectionnez le cluster Kubernetes et cliquez sur *Next* (Suivant).
+
+
+BlueXP ajoute le cluster Kubernetes à Canvas.
