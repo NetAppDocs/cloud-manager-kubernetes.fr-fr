@@ -25,9 +25,9 @@ NOTE: Cette section utilise _Kubernetes cluster_ où la configuration est la mê
 
 Astra Trident:: Il est nécessaire de disposer de l'une des quatre versions les plus récentes d'Astra Trident. Vous pouvez installer ou mettre à niveau Astra Trident directement à partir de BlueXP. Vous devriez link:https://docs.netapp.com/us-en/trident/trident-get-started/requirements.html["passez en revue les prérequis"^] Avant d'installer Astra Trident.
 Cloud Volumes ONTAP:: Cloud Volumes ONTAP doit être configuré en tant que système de stockage back-end pour le cluster. https://docs.netapp.com/us-en/trident/trident-use/backends.html["Accédez à la documentation Astra Trident pour connaître les étapes de configuration"^].
-Connecteur BlueXP:: Un connecteur doit s'exécuter dans Azure avec les autorisations requises.  a Connector,Pour en savoir plus.
-Connectivité réseau:: La connectivité réseau est requise entre le cluster Kubernetes et le connecteur et entre le cluster Kubernetes et Cloud Volumes ONTAP.  networking requirements,Pour en savoir plus.
-Autorisation RBAC:: BlueXP prend en charge les clusters RBAC avec et sans Active Directory. Le rôle connecteur BlueXP doit être autorisé sur chaque cluster Azure.  up RBAC authorization,Pour en savoir plus.
+Connecteur BlueXP:: Un connecteur doit s'exécuter dans Azure avec les autorisations requises. <<Préparer un connecteur,Pour en savoir plus>>.
+Connectivité réseau:: La connectivité réseau est requise entre le cluster Kubernetes et le connecteur et entre le cluster Kubernetes et Cloud Volumes ONTAP. <<Examiner les besoins en matière de mise en réseau,Pour en savoir plus>>.
+Autorisation RBAC:: BlueXP prend en charge les clusters RBAC avec et sans Active Directory. Le rôle connecteur BlueXP doit être autorisé sur chaque cluster Azure. <<Configurez l'autorisation RBAC,Pour en savoir plus>>.
 
 
 
@@ -119,6 +119,7 @@ NOTE: Pour installer Astra Trident, BlueXP installe le système back-end Trident
 --
 
 
+.Avant de commencer
 Votre RBAC ``subjects: name:`` La configuration varie légèrement en fonction de votre type de cluster Kubernetes.
 
 * Si vous déployez un cluster *Managed AKS*, vous avez besoin de l'ID objet pour l'identité gérée attribuée par le système pour le connecteur. Cet identifiant est disponible sur le portail de gestion Azure.
@@ -128,6 +129,7 @@ image:screenshot-k8s-aks-obj-id.png["Copie d'écran de la fenêtre d'ID d'objet 
 * Si vous déployez un cluster Kubernetes* *autogéré, vous devez disposer du nom d'utilisateur de tout utilisateur autorisé.
 
 
+.Étapes
 Créer un rôle de cluster et une liaison de rôle.
 
 . Créez un fichier YAML qui inclut le texte suivant en fonction de vos exigences d'autorisation. Remplacer l' ``subjects: kind:`` variable avec votre nom d'utilisateur et ``subjects: user:`` Avec l'ID objet pour l'identité gérée attribuée par le système ou le nom d'utilisateur de tout utilisateur autorisé, comme décrit ci-dessus.

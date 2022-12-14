@@ -25,9 +25,9 @@ NOTE: Cette rubrique utilise _cluster Kubernetes_ où la configuration est la m�
 
 Astra Trident:: Il est nécessaire de disposer de l'une des quatre versions les plus récentes d'Astra Trident. Vous pouvez installer ou mettre à niveau Astra Trident directement à partir de BlueXP. Vous devriez link:https://docs.netapp.com/us-en/trident/trident-get-started/requirements.html["passez en revue les prérequis"^] Avant d'installer Astra Trident
 Cloud Volumes ONTAP:: Cloud Volumes ONTAP doit se trouver dans BlueXP, sous le même compte de location, espace de travail et connecteur que le cluster Kubernetes. https://docs.netapp.com/us-en/trident/trident-use/backends.html["Accédez à la documentation Astra Trident pour connaître les étapes de configuration"^].
-Connecteur BlueXP:: Un connecteur doit être exécuté dans Google avec les autorisations requises.  a Connector,Pour en savoir plus.
-Connectivité réseau:: La connectivité réseau est requise entre le cluster Kubernetes et le connecteur et entre le cluster Kubernetes et Cloud Volumes ONTAP.  networking requirements,Pour en savoir plus.
-Autorisation RBAC:: BlueXP prend en charge les clusters RBAC avec et sans Active Directory. Le rôle connecteur BlueXP doit être autorisé sur chaque cluster GKE.  up RBAC authorization,Pour en savoir plus.
+Connecteur BlueXP:: Un connecteur doit être exécuté dans Google avec les autorisations requises. <<Préparer un connecteur,Pour en savoir plus>>.
+Connectivité réseau:: La connectivité réseau est requise entre le cluster Kubernetes et le connecteur et entre le cluster Kubernetes et Cloud Volumes ONTAP. <<Examiner les besoins en matière de mise en réseau,Pour en savoir plus>>.
+Autorisation RBAC:: BlueXP prend en charge les clusters RBAC avec et sans Active Directory. Le rôle connecteur BlueXP doit être autorisé sur chaque cluster GKE. <<Configurez l'autorisation RBAC,Pour en savoir plus>>.
 
 
 
@@ -102,6 +102,7 @@ NOTE: Pour installer Astra Trident, BlueXP installe le système back-end Trident
 --
 
 
+.Avant de commencer
 À configurer ``subjects: name:`` Dans le fichier YAML, vous devez connaître l'ID unique BlueXP.
 
 Vous pouvez trouver l'ID unique de deux façons :
@@ -119,6 +120,7 @@ image:screenshot-gke-unique-id.png["Copie d'écran des informations du compte de
 
 
 
+.Étapes
 Créer un rôle de cluster et une liaison de rôle.
 
 . Créez un fichier YAML qui inclut le texte suivant en fonction de vos exigences d'autorisation. Remplacer l' ``subjects: kind:`` variable avec votre nom d'utilisateur et ``subjects: user:`` Avec l'identifiant unique du compte de service autorisé.

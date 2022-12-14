@@ -35,6 +35,7 @@ image:screenshot-k8s-aks-discover.png["Copie d'écran de la page découvrir un c
 
 
 
+.Résultat
 BlueXP ajoute le cluster Kubernetes à Canvas.
 
 image:screenshot-k8s-aks-canvas.png["Capture d'écran du Canvas dans BlueXP qui montre un cluster Kubernetes."]
@@ -65,4 +66,5 @@ image:screenshot-k8s-aks-import-2.png["Capture d'écran de la page de certificat
 
 
 
+.Résultat
 BlueXP ajoute le cluster Kubernetes à Canvas.

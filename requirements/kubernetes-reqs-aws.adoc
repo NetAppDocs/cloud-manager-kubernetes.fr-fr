@@ -25,9 +25,9 @@ NOTE: Cette section utilise _Kubernetes cluster_ où la configuration est la mê
 
 Astra Trident:: Il est nécessaire de disposer de l'une des quatre versions les plus récentes d'Astra Trident. Vous pouvez installer ou mettre à niveau Astra Trident directement à partir de BlueXP. Vous devriez link:https://docs.netapp.com/us-en/trident/trident-get-started/requirements.html["passez en revue les prérequis"^] Avant d'installer Astra Trident.
 Cloud Volumes ONTAP:: Cloud Volumes ONTAP pour AWS doit être configuré en tant que système de stockage back-end pour le cluster. https://docs.netapp.com/us-en/trident/trident-use/backends.html["Accédez à la documentation Astra Trident pour connaître les étapes de configuration"^].
-Connecteur BlueXP:: Un connecteur doit être exécuté dans AWS avec les autorisations requises.  a Connector,Pour en savoir plus.
-Connectivité réseau:: La connectivité réseau est requise entre le cluster Kubernetes et le connecteur et entre le cluster Kubernetes et Cloud Volumes ONTAP.  networking requirements,Pour en savoir plus.
-Autorisation RBAC:: Le rôle BlueXP Connector doit être autorisé sur chaque cluster Kubernetes.  up RBAC authorization,Pour en savoir plus.
+Connecteur BlueXP:: Un connecteur doit être exécuté dans AWS avec les autorisations requises. <<Préparer un connecteur,Pour en savoir plus>>.
+Connectivité réseau:: La connectivité réseau est requise entre le cluster Kubernetes et le connecteur et entre le cluster Kubernetes et Cloud Volumes ONTAP. <<Examiner les besoins en matière de mise en réseau,Pour en savoir plus>>.
+Autorisation RBAC:: Le rôle BlueXP Connector doit être autorisé sur chaque cluster Kubernetes. <<Configurez l'autorisation RBAC,Pour en savoir plus>>.
 
 
 

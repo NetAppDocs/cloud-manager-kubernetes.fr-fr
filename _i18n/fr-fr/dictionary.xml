@@ -610,4 +610,15 @@
   <block id="cc8b0535948da368f832027c19b7f853" category="list-text">Veillez à copier le numéro de série du compte (960xxxx) utilisé ci-dessus pour le champ Numéro de série. Le traitement du compte sera ainsi accéléré.</block>
   <block id="485af08837450e02af336c55571fef57" category="paragraph">Ajoutez des clusters Kubernetes à BlueXP pour une gestion avancée des données en quelques étapes.</block>
   <block id="c0a71f242f9a20837eeb221262b5ec52" category="paragraph">À l'aide de <block ref="541c088337155bc1f5030ebf639984c7" category="inline-link-macro-rx"></block> Vous pouvez commencer à gérer les clusters Kubernetes en quelques étapes seulement.</block>
+  <block id="135b308ed83c53f1516b7c754566d1c4" category="paragraph-title">Avant de commencer</block>
+  <block id="8eea62084ca7e541d918e823422bd82e" category="paragraph-title">Résultat</block>
+  <block id="bd965e38a0c9cf27aa1bde099308e23f" category="paragraph-title">Une fois que vous avez terminé</block>
+  <block id="fd69c5cf902969e6fb71d043085ddee6" category="paragraph-title">Résultats</block>
+  <block id="06c2cea18679d64399783748fa367bdd" category="inline-image-macro">Une seule</block>
+  <block id="a2d56436fc6737079209e6c74380c5fb" category="paragraph-title"><block ref="58f667aaf05f87159670e12bd9bc076b" category="inline-image-macro-rx" type="image"></block> Passer en revue les prérequis</block>
+  <block id="aada29daee1d64ed0fe907043855cb7e" category="inline-image-macro">Deux</block>
+  <block id="72cff0170f097fb9ba504afabcc27830" category="paragraph-title"><block ref="54f425ce8d89f4ed6b8a546561af5d60" category="inline-image-macro-rx" type="image"></block> Ajoutez vos clusters Kubernetes à BlueXP</block>
+  <block id="981b8fcee42e1e726a67a2b9a98ea6e9" category="inline-image-macro">Quatre</block>
+  <block id="ea57f7b4ce8ce45779ed65b7d0c3cd80" category="paragraph-title"><block ref="569b2be0fb2eea776857d64ee5106536" category="inline-image-macro-rx" type="image"></block> Commencez le provisionnement des volumes persistants</block>
+  <block id="3442e8b715f58fe8a7e64ea2efc92fed" category="paragraph-title"><block ref="beadfa85a2fdca06b91edc1131c603e6" category="inline-image-macro-rx" type="image"></block> Gérez vos clusters à l'aide de BlueXP</block>
 </blocks>

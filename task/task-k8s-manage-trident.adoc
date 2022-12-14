@@ -41,4 +41,5 @@ image:screenshot-k8s-upgrade-trident.png["Copie d'écran du processus de mise à
 
 
 
+.Résultats
 La dernière version d'Astra Trident est installée. Vous pouvez à présent ajouter des classes de stockage.

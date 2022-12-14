@@ -49,6 +49,7 @@ image:screenshot-k8s-select-storage-class.png["Copie d'écran montrant la sélec
 
 
 
+.Résultats
 Vous pouvez cliquer sur pour afficher la classe de stockage depuis la page de ressources du cluster Kubernetes.
 
 image:screenshot-k8s-view-storage-class.png["Copie d'écran affichant « Afficher la classe de stockage » sur la page de ressources Kubernetes."]
@@ -63,6 +64,7 @@ image:screenshot-k8s-view-storage-class.png["Copie d'écran affichant « Affiche
 . Cliquez sur l'icône d'information pour afficher les détails de l'environnement de travail.
 
 
+.Résultats
 Le panneau de détails de l'environnement de travail s'ouvre.
 
 image:screenshot-k8s-info-storage-class.png["Copie d'écran des détails de l'environnement de travail pour le cluster Kubernetes."]
@@ -80,6 +82,7 @@ image:screenshot-k8s-default-storage-class.png["Capture d'écran du menu d'actio
 
 
 
+.Résultats
 La classe de stockage sélectionnée est définie par défaut.
 
 image:screenshot-k8s-default-set-storage-class.png["Capture d'écran indiquant la classe de stockage par défaut."]
@@ -101,4 +104,5 @@ image:screenshot-k8s-remove-confirm-storage-class.png["Capture d'écran de l'éc
 
 
 
+.Résultats
 La classe de stockage sélectionnée est supprimée.

@@ -22,6 +22,7 @@ Ajoutez des clusters Kubernetes à BlueXP pour une gestion avancée des données
 
 À l'aide de link:https://docs.netapp.com/us-en/cloud-manager-setup-admin/index.html["BlueXP"^] Vous pouvez commencer à gérer les clusters Kubernetes en quelques étapes seulement.
 
+.image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-1.png["Une seule"] Passer en revue les prérequis
 [role="quick-margin-para"]
 Assurez-vous que votre environnement respecte les conditions préalables requises pour votre type de cluster.
 
@@ -34,6 +35,7 @@ link:https://docs.netapp.com/us-en/cloud-manager-kubernetes/requirements/kuberne
 [role="quick-margin-para"]
 link:https://docs.netapp.com/us-en/cloud-manager-kubernetes/requirements/kubernetes-reqs-gke.html["Conditions requises pour les clusters Kubernetes dans Google Cloud"]
 
+.image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-2.png["Deux"] Ajoutez vos clusters Kubernetes à BlueXP
 [role="quick-margin-para"]
 Vous pouvez ajouter des clusters Kubernetes et les connecter à un environnement de travail à l'aide de BlueXP.
 
@@ -46,12 +48,14 @@ link:https://docs.netapp.com/us-en/cloud-manager-kubernetes/task/task-kubernetes
 [role="quick-margin-para"]
 link:https://docs.netapp.com/us-en/cloud-manager-kubernetes/task/task-kubernetes-discover-gke.html["Ajoutez un cluster Google Cloud Kubernetes"]
 
+.image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-3.png["Quatre"] Commencez le provisionnement des volumes persistants
 [role="quick-margin-para"]
 Demandez et gérez les volumes persistants à l'aide d'interfaces et de constructions Kubernetes natives. BlueXP crée des classes de stockage NFS et iSCSI que vous pouvez utiliser pour le provisionnement de volumes persistants.
 
 [role="quick-margin-para"]
 link:https://docs.netapp.com/us-en/trident/trident-get-started/kubernetes-postdeployment.html#step-3-provision-your-first-volume["En savoir plus sur le provisionnement de votre premier volume avec Astra Trident"^].
 
+.image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-4.png["Quatre"] Gérez vos clusters à l'aide de BlueXP
 [role="quick-margin-para"]
 Après avoir ajouté des clusters Kubernetes à BlueXP, vous pouvez gérer les clusters à partir de la page de ressources BlueXP.
 

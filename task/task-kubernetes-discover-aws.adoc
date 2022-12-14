@@ -35,6 +35,7 @@ image:screenshot-discover-kubernetes-aws-2.png["Copie d'écran de la page décou
 
 
 
+.Résultat
 BlueXP ajoute le cluster Kubernetes à Canvas.
 
 image:screenshot-kubernetes-canvas.png["Capture d'écran du Canvas dans BlueXP qui montre un cluster Kubernetes."]
@@ -56,4 +57,5 @@ image:screenshot-k8s-aks-import-1.png["Capture d'écran de la page Import cluste
 . Sélectionnez le cluster Kubernetes et cliquez sur *Next* (Suivant).
 
 
+.Résultat
 BlueXP ajoute le cluster Kubernetes à Canvas.

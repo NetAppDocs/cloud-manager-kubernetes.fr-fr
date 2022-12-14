@@ -28,4 +28,5 @@ image:screenshot-k8s-confirm-remove-cluster.png["Copie d'écran de la page confi
 
 
 
+.Résultats
 Le cluster Kubernetes est supprimé de l'espace de travail et n'est plus visible sur la Canvas.
