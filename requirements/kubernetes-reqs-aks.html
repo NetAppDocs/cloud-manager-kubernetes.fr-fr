@@ -803,7 +803,7 @@
 <p class="page-details">
   
     
-    <time datetime="2022-11-17 06:50:20 +0000">11/17/2022</time>
+    <time datetime="2022-12-14 18:27:45 +0000">12/14/2022</time>
     
   
 
@@ -847,15 +847,15 @@ Cette section utilise <em>Kubernetes cluster</em> où la configuration est la m�
 </dd>
 <dt class="hdlist1">Connecteur BlueXP</dt>
 <dd>
-<p>Un connecteur doit s&#8217;exécuter dans Azure avec les autorisations requises.  a Connector,Pour en savoir plus.</p>
+<p>Un connecteur doit s&#8217;exécuter dans Azure avec les autorisations requises. <a href="#préparer-un-connecteur">Pour en savoir plus</a>.</p>
 </dd>
 <dt class="hdlist1">Connectivité réseau</dt>
 <dd>
-<p>La connectivité réseau est requise entre le cluster Kubernetes et le connecteur et entre le cluster Kubernetes et Cloud Volumes ONTAP.  networking requirements,Pour en savoir plus.</p>
+<p>La connectivité réseau est requise entre le cluster Kubernetes et le connecteur et entre le cluster Kubernetes et Cloud Volumes ONTAP. <a href="#examiner-les-besoins-en-matière-de-mise-en-réseau">Pour en savoir plus</a>.</p>
 </dd>
 <dt class="hdlist1">Autorisation RBAC</dt>
 <dd>
-<p>BlueXP prend en charge les clusters RBAC avec et sans Active Directory. Le rôle connecteur BlueXP doit être autorisé sur chaque cluster Azure.  up RBAC authorization,Pour en savoir plus.</p>
+<p>BlueXP prend en charge les clusters RBAC avec et sans Active Directory. Le rôle connecteur BlueXP doit être autorisé sur chaque cluster Azure. <a href="Configurez l&.html#8217;autorisation RBAC">Pour en savoir plus</a>.</p>
 </dd>
 </dl>
 </div>
@@ -1024,6 +1024,7 @@ Pour installer Astra Trident, BlueXP installe le système back-end Trident et le
 </dl>
 </div>
 <div class="paragraph">
+<div class="title">Avant de commencer</div>
 <p>Votre RBAC <code>subjects: name:</code> La configuration varie légèrement en fonction de votre type de cluster Kubernetes.</p>
 </div>
 <div class="ulist">
@@ -1040,6 +1041,7 @@ Pour installer Astra Trident, BlueXP installe le système back-end Trident et le
 </ul>
 </div>
 <div class="paragraph">
+<div class="title">Étapes</div>
 <p>Créer un rôle de cluster et une liaison de rôle.</p>
 </div>
 <div class="olist arabic">
